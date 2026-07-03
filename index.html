@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Voltcloak — Roblox Edition</title>
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+  :root{ --bg:#0e1116; --panel:#161b22; --txt:#e6edf3; --accute:#2f81f7; }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; height:100%; background:var(--bg); color:var(--txt);
+    font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  header{ padding:14px 18px; text-align:center; }
+  header h1{ margin:0; font-size:18px; font-weight:650; letter-spacing:.2px; }
+  header p{ margin:4px 0 0; font-size:13px; opacity:.65; }
+  .wrap{ height:calc(100% - 64px); display:flex; flex-direction:column; }
+  model-viewer{ flex:1; width:100%; background:
+    radial-gradient(120% 90% at 50% 0%, #1c2230 0%, #0e1116 70%); }
+  .bar{ display:flex; gap:10px; justify-content:center; padding:14px;
+    background:var(--panel); border-top:1px solid #21262d; flex-wrap:wrap; }
+  button{ appearance:none; border:1px solid #30363d; background:#1b2230; color:var(--txt);
+    padding:10px 22px; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer;
+    transition:.15s; }
+  button:hover{ border-color:#3d4854; }
+  button.active{ background:var(--accute); border-color:var(--accute); color:#fff; }
+  .hint{ position:absolute; bottom:78px; width:100%; text-align:center; font-size:12px;
+    opacity:.5; pointer-events:none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Voltcloak — Roblox Edition</h1>
+  <p>drag to rotate · scroll to zoom · pinch on mobile</p>
+</header>
+<div class="wrap">
+  <model-viewer id="mv" src="m4k.glb" alt="Voltcloak Roblox character"
+    camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="18deg"
+    shadow-intensity="0.55" exposure="1.0" environment-image="neutral" tone-mapping="neutral"
+    camera-orbit="0deg 85deg 2.2m" min-camera-orbit="auto 0deg auto" touch-action="pan-y">
+  </model-viewer>
+  <div class="hint">3 versiyon: 4K master · 2K · Roblox-ready (18k tri, 1K)</div>
+  <div class="bar">
+    <button data-src="m4k.glb" class="active">★ Master 4K</button>
+    <button data-src="m2k.glb">2K</button>
+    <button data-src="rbx.glb">Roblox (18k tri)</button>
+  </div>
+</div>
+<script>
+  const mv = document.getElementById('mv');
+  document.querySelectorAll('.bar button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.bar button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      mv.setAttribute('src', b.dataset.src);
+    });
+  });
+</script>
+</body>
+</html>
